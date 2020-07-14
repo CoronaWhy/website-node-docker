@@ -1,8 +1,10 @@
 # Description
 
-`/public` is a simple code export from `webflow.com` for `coronawhy.org` website (July 13th, 2020)
+- `/public` is a simple code export from `webflow.com` for `coronawhy.org` website (July 13th, 2020)
 
-`Dockerfile` packages the website into very slim alpine based docker image, via node and [serve](https://www.npmjs.com/package/serve). 
+- `Dockerfile` packages the website into very slim alpine based docker image, via node and [serve](https://www.npmjs.com/package/serve). 
+
+- build container exposes 5000 port
 
 
 ## TODO
