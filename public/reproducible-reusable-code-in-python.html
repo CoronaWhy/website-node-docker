@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--  This site was created in Webflow. http://www.webflow.com  -->
+<!--  Last Published: Mon Jul 13 2020 21:34:37 GMT+0000 (Coordinated Universal Time)  -->
+<html data-wf-page="5ed501f110bcba56fb5fe87a" data-wf-site="5e729ef3ef0f906b804d4f27" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Writing Reproducible, Reusable Code in Python:</title>
+  <meta content="This tutorial will teach you how to make sure your Python code is reusable, reproducible, and ultimately useful for others. We will cover organization of Python code, packaging with setuptools, unit testing with unittest/pytest, code quality assurance with flake8, documentation with Sphinx, automation with Tox, continuous integration with Travis-CI, documentation hosting with ReadTheDocs, implementation of command line interfaces using Click, versioning with bumpversion, archiving on Zenodo, and ultimately deployment to PyPI." name="description">
+  <meta content="Writing Reproducible, Reusable Code in Python:" property="og:title">
+  <meta content="This tutorial will teach you how to make sure your Python code is reusable, reproducible, and ultimately useful for others. We will cover organization of Python code, packaging with setuptools, unit testing with unittest/pytest, code quality assurance with flake8, documentation with Sphinx, automation with Tox, continuous integration with Travis-CI, documentation hosting with ReadTheDocs, implementation of command line interfaces using Click, versioning with bumpversion, archiving on Zenodo, and ultimately deployment to PyPI." property="og:description">
+  <meta content="https://uploads-ssl.webflow.com/5e729ef3ef0f906b804d4f27/5e9d9c6619e8041bf8421468_coronawhy-white.png" property="og:image">
+  <meta content="Writing Reproducible, Reusable Code in Python:" property="twitter:title">
+  <meta content="This tutorial will teach you how to make sure your Python code is reusable, reproducible, and ultimately useful for others. We will cover organization of Python code, packaging with setuptools, unit testing with unittest/pytest, code quality assurance with flake8, documentation with Sphinx, automation with Tox, continuous integration with Travis-CI, documentation hosting with ReadTheDocs, implementation of command line interfaces using Click, versioning with bumpversion, archiving on Zenodo, and ultimately deployment to PyPI." property="twitter:description">
+  <meta content="https://uploads-ssl.webflow.com/5e729ef3ef0f906b804d4f27/5e9d9c6619e8041bf8421468_coronawhy-white.png" property="twitter:image">
+  <meta property="og:type" content="website">
+  <meta content="summary_large_image" name="twitter:card">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="Webflow" name="generator">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/coronawhy.webflow.css" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic","Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic","Merriweather:300,300italic,400,400italic,700,700italic,900,900italic","Montserrat:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"]  }});</script>
+  <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="images/favicon.jpg" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.jpg" rel="apple-touch-icon">
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-161896604-1"></script>
+  <script type="text/javascript">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-161896604-1', {'anonymize_ip': false});</script>
+  <script src="https://www.google.com/recaptcha/api.js" type="text/javascript"></script>
+  <!--  Google Tag Manager  -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MRZG38W');</script>
+  <!--  End Google Tag Manager  -->
+  <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5e8efd63c08fd00012f1a69d&product=inline-share-buttons" async="async"></script>
+</head>
+<body>
+  <div class="w-embed w-iframe">
+    <!--  Google Tag Manager (noscript)  -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MRZG38W" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!--  End Google Tag Manager (noscript)  -->
+  </div>
+  <div data-collapse="medium" data-animation="default" data-duration="400" role="banner" class="nav-bar w-nav">
+    <div class="nav-container"><a href="index.html" class="nav-logo-link w-nav-brand"><img src="images/logo-32x.png" width="643" srcset="images/logo-32x-p-500.png 500w, images/logo-32x-p-800.png 800w, images/logo-32x-p-1080.png 1080w, images/logo-32x.png 1286w" sizes="(max-width: 479px) 63vw, (max-width: 767px) 150px, 200px" alt="" class="nav-logo"></a>
+      <nav role="navigation" class="nav-menu w-nav-menu">
+        <div data-hover="" data-delay="0" class="nav-dropdown w-dropdown">
+          <div class="uc__hidden w-dropdown-toggle">
+            <div>Projects </div>
+            <div class="nav-icon w-icon-dropdown-toggle"></div>
+          </div>
+          <nav class="nav__dropdown-list w-dropdown-list">
+            <div class="nav__grid-wrap">
+              <div class="w-layout-grid nav-grid">
+                <a href="#" class="nav-link-block is--green w-inline-block">
+                  <div class="nav-badge">task 1</div>
+                  <h5>What is known about transmission, incubation, and environmental stability?</h5>
+                </a>
+                <a href="#" class="nav-link-block is--orange w-inline-block">
+                  <div class="nav-badge">task 2</div>
+                  <h5>What do we know about COVID-19 risk factors?</h5>
+                </a>
+                <a href="#" class="nav-link-block is--purple w-inline-block">
+                  <div class="nav-badge">task 3</div>
+                  <h5>What do we know about virus genetics, origin, and evolution?</h5>
+                </a>
+                <a href="#" class="nav-link-block is--pink w-inline-block">
+                  <div class="nav-badge">task 4</div>
+                  <h5>What do we know about vaccines and therapeutics?</h5>
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div><a href="index.html" class="nav-link w-nav-link">Home</a><a href="daily-progress.html" class="nav-link w-nav-link">Daily Progress</a><a href="calendar.html" class="nav-link uc__hidden w-nav-link">Calendar</a><a href="team.html" class="nav-link w-nav-link">Team</a><a href="cord19.html" class="nav-link w-nav-link">CORD-19</a><a href="team.html" class="nav-link uc__hidden w-nav-link">Team</a>
+        <div class="nav__button-wrap"><a href="join-the-fight.html" class="button is--nav w-button">Join the Fight!</a></div>
+      </nav>
+      <div class="nav-menu__button w-nav-button">
+        <div class="w-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="container is--block w-container">
+      <div class="div-wrap">
+        <h1 class="h1-style"><strong>Writing Reproducible, Reusable Code in Python: Documentation, Packaging, Continuous Integration, and Beyond</strong></h1>
+      </div>
+    </div>
+    <div class="w-container">
+      <div>An interactive tutorial presented by <a href="https://github.com/cthoyt">Charles Tapley Hoyt</a> to CoronaWhy on June 3rd, 2020 at 9am PDT/Noon EST/18.00 CEST. If you want to get in touch, tweet me <a href="https://twitter.com/cthoyt">@cthoyt</a>.<br></div>
+      <div style="padding-top:56.17021276595745%" id="w-node-2af703520afd-fb5fe87a" class="w-embed-youtubevideo embed-youtube"><iframe src="https://www.youtube.com/embed/lo_g-GbYtaA?rel=0&amp;controls=1&amp;autoplay=0&amp;mute=0&amp;start=0" frameborder="0" style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:auto" allow="autoplay; encrypted-media" allowfullscreen=""></iframe></div>
+      <div class="_50 centered-block">
+        <div class="w-form">
+          <form id="wf-form-Reproducible-Code-Workshop" name="wf-form-Reproducible-Code-Workshop" data-name="Reproducible Code Workshop" class="form-2"><label for="name">Name</label><input type="text" class="w-input" maxlength="256" name="name" data-name="Name" placeholder="" id="name"><label for="email">Email Address</label><input type="email" class="w-input" maxlength="256" name="email" data-name="Email" placeholder="" id="email" required=""><label for="linkedin">Linkedin</label><input type="text" class="w-input" maxlength="256" name="linkedin" data-name="linkedin" placeholder="" id="linkedin">
+            <div data-sitekey="6LcDbewUAAAAALUXUIV1RemPhca4bTeCEkEzbTIB" class="w-form-formrecaptcha g-recaptcha g-recaptcha-error g-recaptcha-disabled"></div><input type="submit" value="Register" data-wait="Please wait..." class="button w-button"></form>
+          <div class="w-form-done">
+            <div>Thank you! You are registered, here&#x27;s a link to Zoom meeting:<br><a href="https://stanford.zoom.us/j/91989192483" target="_blank">https://stanford.zoom.us/j/91989192483<br>‍</a><br>And you can always add event your calendar</div>
+            <div class="w-embed"><a target="_blank" href="https://calendar.google.com/event?action=TEMPLATE&tmeid=NDBia3A5M3V0NmE0ZTE2ZGNoOXFlYnBianQgY29yb25hd2h5Lm9yZ19nZXFmYmNnOHN0dTNlYmV1b3NtbmZic2Fqc0Bn&tmsrc=coronawhy.org_geqfbcg8stu3ebeuosmnfbsajs%40group.calendar.google.com"><img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_en.gif"></a></div>
+          </div>
+          <div class="w-form-fail">
+            <div>Oops! Something went wrong while submitting the form.</div>
+          </div>
+        </div>
+      </div>
+      <div class="w-richtext">
+        <p>‍</p>
+        <p><strong>Abstract</strong></p>
+        <p>This tutorial will teach you how to make sure your Python code is reusable, reproducible, and ultimately useful for others. We will cover organization of Python code, packaging with setuptools, unit testing with unittest/pytest, code quality assurance with flake8, documentation with Sphinx, automation with Tox, continuous integration with Travis-CI, documentation hosting with ReadTheDocs, implementation of command line interfaces using Click, versioning with bumpversion, archiving on Zenodo, and ultimately deployment to PyPI. This tutorial will be appropriate for Python programmers of <strong><em>all</em></strong> skill levels and for projects of <strong><em>all</em></strong> sizes.</p>
+        <h2><br></h2>
+        <p><strong>Prerequisites</strong></p>
+        <p>This isn&#x27;t <em>really</em> a tutorial about coding in Python, but more about all of the best tools to use while/after you&#x27;re doing it. This means that anyone, with any level of proficiency in Python can join and learn something - even if you&#x27;re just at Hello World!. Most of the ideas from this talk can also be brought to other languages, so even if your favorite is another, you might still learn something.<br></p>
+        <p>This tutorial will be live-coded, but you can feel free to follow along! Before the talk, I&#x27;ll post a link to a repository with all the code all ready in case you&#x27;d rather copy/paste or read in your favorite text editor. If you want to follow along, you&#x27;ll need the following free accounts before we begin:</p>
+        <ul role="list">
+          <li>GitHub (<a href="https://github.com">https://github.com</a>)</li>
+          <li>Travis CI (<a href="https://travis-ci.com">https://travis-ci.com</a>; use GitHub account to sign in)</li>
+          <li>Zenodo (<a href="https://zenodo.org/">https://zenodo.org</a>; use GitHub account to sign in)</li>
+          <li>Read the Docs (<a href="https://readthedocs.io">https://readthedocs.io</a>; use GitHub account to sign in)</li>
+          <li>Test PyPI (<a href="https://test.pypi.org">https://test.pypi.org</a>; it&#x27;s like the real PyPI but for learning and testing)</li>
+        </ul>
+        <p>You&#x27;ll also have to be comfortable using the command line and have the following software installed:</p>
+        <ul role="list">
+          <li>Git (<a href="https://git-scm.com">https://git-scm.com</a>)</li>
+          <li>Python 3 (<a href="https://www.python.org">https://www.python.org</a> preferably 3.8+ because I might throw in a walrus operator :=)</li>
+          <li>Make (should already be installed on *nix systems, sorry Windows users)</li>
+        </ul>
+        <p>It would be best to work in an IDE like PyCharm, have a nice git GUI set up (you&#x27;re not a martyr; I use GitHub Desktop), and have the following python packages installed and ready to go:</p>
+        <ul role="list">
+          <li>virtualenv (<a href="https://virtualenv.pypa.io/en/stable/">https://virtualenv.pypa.io/en/stable/</a>)</li>
+          <li>virtualenvwrapper (<a href="https://virtualenvwrapper.readthedocs.io/en/latest">https://virtualenvwrapper.readthedocs.io/en/latest</a>)</li>
+          <li>pytest (<a href="http://doc.pytest.org/en/latest/">http://doc.pytest.org/en/latest/</a>)</li>
+          <li>tox (<a href="https://tox.readthedocs.io/en/latest/">https://tox.readthedocs.io/en/latest/</a>)</li>
+          <li>sphinx (<a href="http://www.sphinx-doc.org/en/stable/">http://www.sphinx-doc.org/en/stable/</a>)</li>
+          <li>sphinx-rtd-theme (<a href="https://github.com/snide/sphinx_rtd_theme">https://github.com/snide/sphinx_rtd_theme</a>)</li>
+          <li>click (<a href="http://click.palletsprojects.com/en/7.x/">http://click.palletsprojects.com/en/7.x/</a>)</li>
+          <li>check-manifest (<a href="https://github.com/mgedmin/check-manifest">https://github.com/mgedmin/check-manifest</a>)</li>
+          <li>twine (<a href="https://github.com/mgedmin/check-manifest">https://github.com/mgedmin/check-manifest</a>)</li>
+        </ul>
+        <p>Finally, you should make a repository on GitHub where you can push your code and we can debug it together.</p>
+        <h2><br></h2>
+      </div>
+    </div>
+  </div>
+  <div class="section is--footer">
+    <div class="container w-container">
+      <div class="w-layout-grid info-grid is--footer"><a id="w-node-62cc33770ced-f3b265de" href="index.html" class="w-inline-block"><img src="images/logo-32x.png" width="643" srcset="images/logo-32x-p-500.png 500w, images/logo-32x-p-800.png 800w, images/logo-32x-p-1080.png 1080w, images/logo-32x.png 1286w" sizes="(max-width: 479px) 76vw, (max-width: 767px) 150px, 200px" alt="" class="nav-logo"></a>
+        <div id="w-node-62cc33770cef-f3b265de">
+          <div class="uc__hidden">
+            <h6>more</h6>
+            <ol role="list" class="w-list-unstyled">
+              <li class="footer-list-item"><a href="#" class="footer-text-link">Press</a></li>
+              <li class="footer-list-item"><a href="#" class="footer-text-link">Sponsors</a></li>
+            </ol>
+          </div>
+        </div>
+        <div id="w-node-62cc33770cf9-f3b265de">
+          <div class="uc__hidden">
+            <h6>legal</h6>
+            <ol role="list" class="w-list-unstyled">
+              <li class="footer-list-item"><a href="#" class="footer-text-link">Sitemap</a></li>
+              <li class="footer-list-item"><a href="#" class="footer-text-link">Privacy Policy</a></li>
+            </ol>
+          </div>
+        </div>
+        <div id="w-node-62cc33770d03-f3b265de">
+          <h6>follow us</h6>
+          <div class="social-wrap"><a href="https://www.facebook.com/coronawhy/" target="_blank" class="social-link-block w-inline-block"><img src="images/facebook-logo.png" width="45" alt=""></a><a href="https://www.linkedin.com/company/coronawhy/" target="_blank" class="social-link-block w-inline-block"><img src="images/linkedin-logo.png" width="45" alt=""></a><a href="https://www.youtube.com/channel/UCEeuBPsfGE3fceAN3yL5Gig" target="_blank" class="social-link-block w-inline-block"><img src="images/youtube-logo.png.png" width="45" alt=""></a><a href="https://twitter.com/coronawhy" target="_blank" class="social-link-block w-inline-block"><img src="images/twitter-logo.png" width="48" alt=""></a><a href="https://github.com/CoronaWhy" target="_blank" class="social-link-block uc__mr-0 w-inline-block"><img src="images/github-logo.png" width="48" alt=""></a></div>
+        </div>
+        <div id="w-node-62cc33770d11-f3b265de" class="footer__sub-text__wrap">
+          <div class="footer-text">© 2020. CoronaWhy. All rights reserved.</div><a href="https://www.linkedin.com/in/rohan-ganachari-b7228151/" target="_blank" class="footer-text-link is--credit">Website built by Rohan Ganachari</a></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js?site=5e729ef3ef0f906b804d4f27" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="js/webflow.js" type="text/javascript"></script>
+  <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+</body>
+</html>
