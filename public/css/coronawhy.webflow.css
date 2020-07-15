@@ -2790,6 +2790,10 @@ figcaption {
   align-items: center;
 }
 
+.paragraph {
+  text-align: center;
+}
+
 @media screen and (max-width: 991px) {
   body {
     font-size: 16.5px;
