@@ -6,6 +6,19 @@
 
 - build container exposes 5000 port
 
+### Adding new pages
+
+- to add new page to website
+
+```
+cp public/template.html public/<new_page>.html
+git add public/<new_page>.html
+git commit -m "add <new_page> for smth awesome"
+# edit public/<new_page>.html with your favorite editor
+git add public/<new_page>.html
+git commit -m "awesome edits for <new_page>"
+```
+This way it would be much easier to see html code snippets you added to `<new_page>.html` to be incorporated to the main website hosted on webflow.com
 
 ## TODO
 
