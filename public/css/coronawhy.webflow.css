@@ -1363,6 +1363,16 @@ figcaption {
   color: #fff;
 }
 
+.nav-link {
+  width: auto;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 auto;
+  -ms-flex: 0 auto;
+  flex: 0 auto;
+  -o-object-fit: fill;
+  object-fit: fill;
+}
+
 .nav-link.w--current {
   color: #eb0037;
 }
@@ -2792,6 +2802,15 @@ figcaption {
 
 .paragraph {
   text-align: center;
+}
+
+.div-block-15 {
+  margin-bottom: -52px;
+  text-align: right;
+}
+
+.button-3 {
+  overflow: visible;
 }
 
 @media screen and (max-width: 991px) {
